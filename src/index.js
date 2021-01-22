@@ -4,9 +4,23 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
+// Redux
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+// Reducers
+import rootReducer from './reducers';
+
+const store = createStore(
+   rootReducer,
+   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
+   <React.StrictMode>
+      <Provider store={store}>
+         <App />
+     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
