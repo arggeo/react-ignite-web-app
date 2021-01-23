@@ -6,6 +6,9 @@ import { useDispatch } from 'react-redux';
 // Actions
 import { loadGames } from './actions/gamesAction';
 
+// Router
+import { Route } from 'react-router-dom';
+
 // Components & Pages
 import Home from './pages/Home';
 
@@ -16,7 +19,9 @@ function App() {
    return (
       <div className="App">
          <GlobalStyles />
-         <Home />
+         <Route path={['/', '/game/:id']}>
+            <Home />
+         </Route>
       </div>
    );
 }
