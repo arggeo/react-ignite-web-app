@@ -13,6 +13,16 @@ import { motion } from 'framer-motion';
 // Utilities
 import { smallImage } from '../util';
 
+// Images
+import playstation from '../img/playstation.svg';
+import steam from '../img/steam.svg';
+import xbox from '../img/xbox.svg';
+import nintendo from '../img/nintendo.svg';
+import apple from '../img/apple.svg';
+import gamepad from '../img/gamepad.svg';
+import starEmpty from '../img/star-empty.png';
+import starFull from '../img/star-full.png';
+
 const GameDetails = ({ pathID }) => {
    const history = useHistory();
 
@@ -21,6 +31,36 @@ const GameDetails = ({ pathID }) => {
       if (element.classList.contains('shadow')) {
          document.body.style.overflow = 'auto';
          history.push('/');
+      }
+   }
+
+   const getStars = () => {
+      const stars = [];
+      const rating = Math.round(game.rating);
+      for (let i = 1; i <= 5; i++) {
+         if (i <= rating) {
+            stars.push(<img src={starFull} alt="star" key={i} />);
+         } else {
+            stars.push(<img src={starEmpty} alt="star" key={i} />);
+         }
+      }
+      return stars;
+   }
+
+   const getPlatform = (platform) => {
+      switch (platform){
+         case 'Playstation 4':
+            return playstation;
+         case 'Xbox One':
+            return xbox;
+         case 'PC':
+            return steam;
+         case 'Nintendo Switch':
+            return nintendo;
+         case 'iOS':
+            return apple;
+         default:
+            return gamepad;
       }
    }
 
@@ -35,12 +75,13 @@ const GameDetails = ({ pathID }) => {
                      <div className="rating">
                         <motion.h3 layoutId={`title ${pathID}`}>{game.name}</motion.h3>
                         <p>Rating: {game.rating}</p>
+                        {getStars()}
                      </div>
                      <Info>
                         <h3>Platforms</h3>
                         <Platforms>
                            {game.platforms.map(platform => (
-                              <h3 key={platform.platform.id}>{platform.platform.name}</h3>
+                              <img key={platform.platform.id} src={getPlatform(platform.platform.name)} alt={platform.platform.name} />
                            ))}
                         </Platforms>
                      </Info>
@@ -71,6 +112,7 @@ const CardShadow = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 5;
   
   &::-webkit-scrollbar {
     width: 0.5rem;
@@ -103,6 +145,12 @@ const Stats = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  
+  img {
+    width: 2rem;
+    height: 2rem;
+    display: inline;
+  }
 `;
 
 const Info = styled(motion.div)`
