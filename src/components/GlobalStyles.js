@@ -6,6 +6,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    outline: none;
   }
   
   html {
@@ -53,6 +54,11 @@ const GlobalStyles = createGlobalStyle`
   
   img {
     display: block;
+  }
+  
+  input {
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
   }
 `;
 

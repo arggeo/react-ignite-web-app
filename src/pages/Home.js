@@ -27,7 +27,7 @@ const Home = () => {
       dispatch(loadGames());
    }, [dispatch]);
 
-   const { popularGames, upcomingGames, newGames } = useSelector(state => state.games);
+   const { popularGames, upcomingGames, newGames, searchedGames } = useSelector(state => state.games);
 
    return (
       <GameList>
@@ -35,6 +35,22 @@ const Home = () => {
             <AnimatePresence>
                {pathID && <GameDetails pathID={pathID} />}
             </AnimatePresence>
+            {searchedGames.length ? (
+               <div className="searched">
+                  <h2>Searched Games</h2>
+                  <Games>
+                     {searchedGames.map(game => (
+                        <Game
+                           name={game.name}
+                           released={game.released}
+                           id={game.id}
+                           img={game.background_image}
+                           key={game.id}
+                        />
+                     ))}
+                  </Games>
+               </div>
+            ) : ''}
             <h2>Upcoming Games</h2>
             <Games>
                {upcomingGames.map(game => (
