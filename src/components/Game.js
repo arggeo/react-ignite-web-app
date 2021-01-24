@@ -15,6 +15,8 @@ import { motion } from 'framer-motion';
 import { smallImage } from '../util';
 
 const Game = ({ name, released, img, id }) => {
+   const stringPathID = id.toString();
+
    const dispatch = useDispatch();
    const loadDetailsHandler = () => {
       document.body.style.overflow = 'hidden';
@@ -22,11 +24,11 @@ const Game = ({ name, released, img, id }) => {
    }
 
    return (
-      <StyledGame onClick={loadDetailsHandler}>
+      <StyledGame layoutId={stringPathID} onClick={loadDetailsHandler}>
          <Link to={`/game/${id}`}>
-            <h3>{name}</h3>
+            <motion.h3 layoutId={`title ${stringPathID}`}>{name}</motion.h3>
             <p>{released}</p>
-            <img src={smallImage(img, 420)} alt={name} />
+            <motion.img layoutId={`image ${stringPathID}`} src={smallImage(img, 420)} alt={name} />
          </Link>
       </StyledGame>
    );

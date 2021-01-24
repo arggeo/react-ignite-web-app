@@ -13,7 +13,7 @@ import { motion } from 'framer-motion';
 // Utilities
 import { smallImage } from '../util';
 
-const GameDetails = () => {
+const GameDetails = ({ pathID }) => {
    const history = useHistory();
 
    const exitDetailsHandler = (e) => {
@@ -30,10 +30,10 @@ const GameDetails = () => {
       <>
          {!isLoading && (
             <CardShadow className="shadow" onClick={exitDetailsHandler}>
-               <Details>
+               <Details layoutId={pathID}>
                   <Stats>
                      <div className="rating">
-                        <h3>{game.name}</h3>
+                        <motion.h3 layoutId={`title ${pathID}`}>{game.name}</motion.h3>
                         <p>Rating: {game.rating}</p>
                      </div>
                      <Info>
@@ -46,7 +46,7 @@ const GameDetails = () => {
                      </Info>
                   </Stats>
                   <Media>
-                     <img src={smallImage(game.background_image, 1280)} alt={game.name} />
+                     <motion.img layoutId={`image ${pathID}`} src={smallImage(game.background_image, 1280)} alt={game.name} />
                   </Media>
                   <Description>
                      <p>{game.description_raw}</p>
