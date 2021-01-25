@@ -4,11 +4,10 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchSearch } from '../actions/gamesAction';
 
-// Styled Components
+// Style & Animation
 import styled from 'styled-components';
-
-// Framer Motion
 import { motion } from 'framer-motion';
+import { fadeIn } from '../animations';
 
 // Images
 import logo from '../img/logo.svg';
@@ -32,7 +31,7 @@ const Nav = () => {
    }
 
    return (
-      <StyledNav>
+      <StyledNav variants={fadeIn} initial="hidden" animate="visible">
          <Logo onClick={clearSearched}>
             <img src={logo} alt="logo" />
             <h1>Ignite</h1>
